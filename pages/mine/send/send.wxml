@@ -1,0 +1,14 @@
+<view class="all-view">
+	<view class="item-view">
+		<view class="delete-view" bindtap="delete">
+			<image class="delete" src="/images/icon_delete.png"></image>
+		</view>
+		<view class="item-sub">
+			<view class="content">交流帖子文字交流帖子文字交流帖子文字交流帖子文字交流帖子文字交流帖。</view>
+			<view class="date">2020.02.03 14:11发布</view>
+		</view>
+	</view>
+	<view class="line-view">
+		<view class="line"></view>
+	</view>
+</view>

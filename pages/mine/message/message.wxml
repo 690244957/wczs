@@ -1,0 +1,19 @@
+<view class="all-view">
+	<view class="comment-item">
+		<view class="head-view">
+			<image src="/images/avatar1.png"></image>
+		</view>
+		<view class="other-view">
+			<view class="top-view">
+				<view class="name">用户名称</view>
+			</view>
+			<view class="content">点赞了你的交流帖子</view>
+			<view class="bottom-view">
+				<view class="time">2020.04.04</view>
+			</view>
+		</view>
+	</view>
+	<view class="line-view">
+		<view class="line"></view>
+	</view>
+</view>

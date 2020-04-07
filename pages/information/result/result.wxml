@@ -1,0 +1,28 @@
+<view class="vertical-view" bindtap="itemClick">
+	<view class="item-view">
+		<view class="item-subview">
+			<view style="margin: 12px 8px 0 0; font-size: 26rpx; font-weight: bold; width: 270px;">喜报 | 我院在我校2019年体育大会颁奖典礼中获第四名和最佳组织奖</view>
+			<view class="item-subview-bottom">
+				<view style="margin: 8px 50px 8px 0; font-size: 24rpx; color: #707070;">2019.12.27</view>
+				<image src="/images/icon_little_star_normal.png"></image>
+				<view style="margin: 8px 0 8px 5px; font-size: 24rpx; color: #707070;">20</view>
+			</view>
+		</view>
+		<image src="/images/icon_post1.png" mode="scaleToFill"></image>
+	</view>
+	<view class="line"></view>
+</view>
+<view class="vertical-view" bindtap="itemClick">
+	<view class="item-view">
+		<view class="item-subview">
+			<view style="margin: 12px 8px 0 0; font-size: 26rpx; font-weight: bold; width: 270px;">我院新媒体研究中心发表人工智能与大数据应用研究成果</view>
+			<view class="item-subview-bottom">
+				<view style="margin: 8px 50px 8px 0; font-size: 24rpx; color: #707070;">2019.12.25</view>
+				<image src="/images/icon_little_star_normal.png"></image>
+				<view style="margin: 8px 0 8px 5px; font-size: 24rpx; color: #707070;">15</view>
+			</view>
+		</view>
+		<image src="/images/icon_post2.png" mode="scaleToFill"></image>
+	</view>
+	<view class="line"></view>
+</view>

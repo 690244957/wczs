@@ -1,0 +1,15 @@
+<view class="all-view">
+	<view class="item-view">
+		<view class="delete-view" bindtap="delete">
+			<image class="delete" src="/images/icon_delete.png"></image>
+		</view>
+		<view class="item-sub">
+			<view class="content">文传学院文传学院文传学院文传学院文传学院文传学院文传学院文传学院文传学院</view>
+			<view class="date">2020.02.03</view>
+		</view>
+		<image class="bigimage" src="/images/icon_post1.png"></image>
+	</view>
+	<view class="line-view">
+		<view class="line"></view>
+	</view>
+</view>

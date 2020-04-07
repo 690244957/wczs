@@ -1,0 +1,31 @@
+<view class="top-line">
+	<view class="search-line" bindtap="openSearchPage">
+		<image src="/images/icon_search.png"></image>
+		<input value="{{key}}" bindinput="bindKeyInput" placeholder='输入关键词搜索相关文章' placeholder-class='search-placeholder'></input>
+	</view>
+	<view class="search-button" bindtap="openResult">搜索</view>
+</view>
+<view class="histroy">
+	<view class="histroy-view">搜索历史</view>
+	<view class="clear" bindtap="clearClick">清空</view>
+</view>
+<view class="histroy-item">
+	<image src="/images/icon_search.png"></image>
+	<view>中山大学南方学院文传学院</view>
+</view>
+<view class="histroy-item">
+	<image src="/images/icon_search.png"></image>
+	<view>喜报 文传学院</view>
+</view>
+<view class="histroy-item">
+	<image src="/images/icon_search.png"></image>
+	<view>大数据参赛</view>
+</view>
+<view class="histroy-item">
+	<image src="/images/icon_search.png"></image>
+	<view>网络与新媒体</view>
+</view>
+<view class="histroy-item">
+	<image src="/images/icon_search.png"></image>
+	<view>汉语言文学</view>
+</view>

@@ -1,0 +1,87 @@
+<view class="all-view">
+	<view class="title">我院新媒体研究中心发表人工智能与大数据应用研究成果</view>
+	<view class="auth-view">
+		<view class="auth-text">文传教务中心</view>
+		<view class="time-text">2020.02.06</view>
+	</view>
+	<view class="content-view">我院新媒体研究中心廖汉腾丶吴雪丶王子佳丶赵蔓丶许智超丶张宗贺老师于“人工智能与大数据应用研讨会”（AIBDA 2019）发表关於人工智能与大数据在人文丶社会科学丶生态设计丶识读能力丶文化遗产丶博物馆研究丶量化自我丶自我追踪丶积极心理学及积极科技等领域的前沿科学计量及文献回顾分析成果。
+
+		AIBDA 2019是2019国际科技创新学术交流大会（IAECST 2019）的一部分，此次会议由吴雪老师与赵蔓老师于12月21日在广州融创万达文华酒店会议中心以口头及海报形式发表，团队一共7篇论文，而网络与新媒体专业学生周昱瑾、孙思盼、刘宇、蒋晓琳亦以共同作者身分参与写作与发表。
+
+		此次会议，我院师生发表共计7篇人工智能与大数据应用论文，展示网新专业师生在成立将满4周年，为发展粤港澳大湾区一流应用型高校及人才高地的阶段性成果。7篇论文皆经组委会专家审核，将由《英国物理学会（IOP）出版社》出版的EI目录期刊之Journal of Physics: Conference Series (ISSN 1742-6588)出版，并提交EI丶SCOPUS丶CNKI检索。</view>
+</view>
+<view class="line"></view>
+<view class="bottom-view">
+	<view class="search-line" bindtap="openSend">
+		<view>发表评论...</view>
+	</view>
+	<view class="subview" bindtap="openComment">
+		<image src="{{isCommentShow ? '/images/icon_message.png' : '/images/icon_comment.png'}}"></image>
+	</view>
+	<view class="subview" bindtap="articleStar">
+		<image src="{{star.path}}"></image>
+		<view>{{starNumber}}</view>
+	</view>
+	<view class="subview">
+		<image src="/images/icon_share.png"></image>
+	</view>
+</view>
+<view class="mask-view" hidden="{{isCommentShow ? false : true}}" bindtap="closeComment">
+	<view class="comment-view" hidden="{{isCommentShow ? false : true}}">
+		<view class="title">评论 3</view>
+		<view class="line2"></view>
+		<view class="comment-item">
+			<div class="comment-head-view">
+				<image class="comment-head" src="/images/avatar1.png" mode="scaleToFill"></image>
+			</div>
+			<view class="other-view">
+				<view class="top-view">
+					<view class="name">可爱的小红</view>
+					<view class="date">2月18号</view>
+					<view class="time">15:30</view>
+					<view class="count">233</view>
+					<image src="{{starImages[0].path}}" data-index="0" catchtap="star"></image>
+				</view>
+				<view class="content">你拿诗和远方和苟且斗，你永远斗不赢的。因为苟且有一万种需求，一万种痛苦，而诗和远方只有一种快乐。</view>
+			</view>
+		</view>
+		<view class="comment-item">
+			<view class="comment-head-view">
+				<image class="comment-head" src="/images/avatar2.png" mode="scaleToFill"></image>
+			</view>
+			<view class="other-view">
+				<view class="top-view">
+					<view class="name">勤奋的小明</view>
+					<view class="date">2月18号</view>
+					<view class="time">15:30</view>
+					<view class="count">233</view>
+					<image src="{{starImages[1].path}}" data-index="1" catchtap="star"></image>
+				</view>
+				<view class="content">一个喜欢把 “ 我是为你好 ” 当口头禅的人，他的自恋自大自以为是一定会逼他在你出问题的时候说这么一句话“ 你看吧我当初说什么来着 ”</view>
+			</view>
+		</view>
+		<view class="comment-item">
+			<view class="comment-head-view">
+				<image class="comment-head" src="/images/avatar3.png" mode="scaleToFill"></image>
+			</view>
+			<view class="other-view">
+				<view class="top-view">
+					<view class="name">笨笨的小熊</view>
+					<view class="date">2月18号</view>
+					<view class="time">15:30</view>
+					<view class="count">233</view>
+					<image src="{{starImages[2].path}}" data-index="2" catchtap="star"></image>
+				</view>
+				<view class="content">这就跟猪肉盖章似得，不是同一个时候出厂，生活在我们身上烙下的印不同</view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="mask-view" hidden="{{isSendShow ? false : true}}" bindtap="closeSend">
+	<view class="send-view" hidden="{{isSendShow ? false : true}}" catchtap="catchtap">
+		<view class="search-line">
+			<input placeholder='发表评论...' placeholder-class='search-placeholder'></input>
+		</view>
+		<view class="send-button" bindtap="send">发表</view>
+	</view>
+</view>
