@@ -9,23 +9,11 @@
 	<view class="histroy-view">搜索历史</view>
 	<view class="clear" bindtap="clearClick">清空</view>
 </view>
-<view class="histroy-item">
+<view class="histroy-item" wx:for="{{list}}" wx:for-item="item" wx:key="index" bindtap="histroyClick" data-index="{{index}}">
 	<image src="/images/icon_search.png"></image>
-	<view>中山大学南方学院文传学院</view>
+	<view>{{item}}</view>
 </view>
-<view class="histroy-item">
-	<image src="/images/icon_search.png"></image>
-	<view>喜报 文传学院</view>
-</view>
-<view class="histroy-item">
-	<image src="/images/icon_search.png"></image>
-	<view>大数据参赛</view>
-</view>
-<view class="histroy-item">
-	<image src="/images/icon_search.png"></image>
-	<view>网络与新媒体</view>
-</view>
-<view class="histroy-item">
-	<image src="/images/icon_search.png"></image>
-	<view>汉语言文学</view>
+<view class="empty-view" hidden="{{list.length > 0 ? true : false}}">
+	<image src="/images/content_empty.png"></image>
+	<view class="empty-text">暂无搜索记录</view>
 </view>

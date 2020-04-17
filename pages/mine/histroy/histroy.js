@@ -5,10 +5,10 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list: []
   },
 
-  delete: function(e) {
+  delete: function (e) {
     wx.showModal({
       title: "温馨提示",
       content: "确定删除此条浏览记录吗？",
@@ -28,7 +28,37 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.cloud.init({
+      env: 'wczs-server-b8jyq'
+    });
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'user_yun',
+      // 传递给云函数的参数
+      data: {
+        $url: "user_ls_Query",
+        other: {
+        }
+      },
+      success: res => {
+        console.log(res)
+        var data = res.result.users_ll_history;
+        // for (let key in data) {
+        //   data[key].time = "220.02.03"
+        //   data.image = "cloud://wczs-server-b8jyq.7763-wczs-server-b8jyq-1301794001/icon_post1.png"
+        // }
+        that.setData({
+          list: data
+        })
+      },
+      fail: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("res")
+      }
+    })
   },
 
   /**

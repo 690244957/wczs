@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    detail: {},
     isCommentShow: false,
     isSendShow: false,
-    starNumber: 15,
     star: {
       state: false,
       path: '/images/icon_little_star_normal.png',
@@ -22,52 +22,51 @@ Page({
       state: false,
       path: '/images/icon_little_star_normal.png'
     }],
+    commentValue: "",
+    commentList: []
   },
 
   star: function (e) {
+    var that = this
     let index = e.currentTarget.dataset.index;
-    let statImgs;
-    if (index == 0) {
-      var path = '', state = !this.data.starImages[0].state
-      if (this.data.starImages[0].state) {
-        path = '/images/icon_little_star_normal.png'
-      } else {
-        path = '/images/icon_little_star_select.png'
-      }
-      statImgs = [{
-        state: state,
-        path: path,
-      }, this.data.starImages[1], this.data.starImages[2]]
-    } else if (index == 1) {
-      let path = '', state = !this.data.starImages[1].state
-      if (this.data.starImages[1].state) {
-        path = '/images/icon_little_star_normal.png'
-      } else {
-        path = '/images/icon_little_star_select.png'
-      }
-      statImgs = [this.data.starImages[0], {
-        state: state,
-        path: path,
-      }, this.data.starImages[2]]
-    } else if (index == 2) {
-      let path = '', state = !this.data.starImages[2].state
-      if (this.data.starImages[2].state) {
-        path = '/images/icon_little_star_normal.png'
-      } else {
-        path = '/images/icon_little_star_select.png'
-      }
-      statImgs = [this.data.starImages[0], this.data.starImages[1], {
-        state: state,
-        path: path,
-      }]
+    var url = ""
+    if (that.data.commentList[index].isStar) {
+      url = "pl_del_heart"
+    } else {
+      url = "pl_add_heart"
     }
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'pl_yun',
+      // 传递给云函数的参数
+      data: {
+        $url: url,
+        other: {
+          _id: that.data.commentList[index]._id,
+          isStar: !that.data.commentList[index].isStar
+        }
+      },
+      success: res => {
+        console.log(res)
+        that.getList()
+      },
+      fail: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("res")
+      }
+    })
+  },
+
+  bindCommentInput: function (e) {
     this.setData({
-      starImages: statImgs
+      commentValue: e.detail.value
     })
   },
 
   articleStar: function (e) {
-    var paths = '', status = !this.data.star.state, starNumbers = this.data.starNumber
+    var paths = '', status = !this.data.star.state, starNumbers = this.data.detail.starNum
     if (this.data.star.state) {
       starNumbers--;
       paths = '/images/icon_little_star_normal.png'
@@ -75,8 +74,9 @@ Page({
       starNumbers++;
       paths = '/images/icon_little_star_select.png'
     }
+    this.data.detail.starNum = starNumbers
     this.setData({
-      starNumber: starNumbers,
+      detail: this.data.detail,
       star: {
         state: status,
         path: paths
@@ -101,6 +101,53 @@ Page({
     that.setData({
       isSendShow: false
     })
+    wx.getUserInfo({
+      success: res => {
+        wx.cloud.callFunction({
+          // 要调用的云函数名称
+          name: 'pl_yun',
+          // 传递给云函数的参数
+          data: {
+            $url: "user_pl_Add",
+            other: {
+              headImage : res.userInfo.avatarUrl, //用户头像
+              name : res.userInfo.nickName, //用户昵称
+              article_id: this.data.detail._id,  //评论的文章ID号
+              content: this.data.commentValue,  //评论内容
+              time: new Date(),  //客户端评论时间
+            }
+          },
+          success: res => {
+            console.log(res)
+            var data = res.result.data;
+            that.setData({
+              list: data,
+              commentValue: ""
+            })
+            this.getList()
+          },
+          fail: err => {
+            console.log(err)
+          },
+          complete: () => {
+            console.log("res")
+          }
+        })
+      },
+      fail: res => {
+        wx.showModal({
+          title: '提示',
+          content: '请先登录',
+          success (res) {
+            if (res.confirm) {
+              console.log('用户点击确定')
+            } else if (res.cancel) {
+              console.log('用户点击取消')
+            }
+          }
+        })
+      },
+    })
   },
   closeComment: function (e) {
     var that = this;
@@ -119,7 +166,56 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var info = JSON.parse(options.info);
+    this.setData({
+      detail: info
+    })
+    wx.cloud.init({
+      env: 'wczs-server-b8jyq'
+    });
+    this.getList()
+  },
 
+  getList: function () {
+    var that = this;
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'pl_yun',
+      // 传递给云函数的参数
+      data: {
+        $url: "user_pl_Query",
+        other: {
+          article_id: this.data.detail._id,  //评论的文章ID号
+        }
+      },
+      success: res => {
+        console.log(res)
+        var data = res.result.data;
+        for (let key in data) {
+          var date = new Date(data[key].time)
+          data[key].date = (date.getMonth() + 1) + "月" + date.getDate() + "日"
+          if ((date.getMinutes() + "").length <= 1) {
+            data[key].time = date.getHours() + ":0" + date.getMinutes()
+          } else {
+            data[key].time = date.getHours() + ":" + date.getMinutes()
+          }
+          if (data[key].isStar) {
+            data[key].path = '/images/icon_little_star_select.png'
+          } else {
+            data[key].path = '/images/icon_little_star_normal.png'
+          }
+        }
+        that.setData({
+          commentList: data
+        })
+      },
+      fail: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("res")
+      }
+    })
   },
 
   /**

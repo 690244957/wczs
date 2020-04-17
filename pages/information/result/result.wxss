@@ -20,7 +20,7 @@ swiper-item {
 }
 
 .item-view image {
-  height: auto;
+  height: 80px;
   width: 250px;
   margin: 12px 0;
 }
@@ -51,4 +51,24 @@ swiper-item {
   width: 100%;
   margin: 0 auto;
   background-color: #EAEAEA;
+}
+
+.empty-view {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.empty-view image {
+  width: 120px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.empty-view .empty-text {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 24rpx;
+  color: #707070;
 }

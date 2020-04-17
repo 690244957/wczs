@@ -134,6 +134,7 @@
   padding-bottom: 8px;
   box-sizing: border-box;
   background-color: #F8F8F8;
+  overflow: scroll;
 }
 
 .swiper2 swiper-item .comment-item {
@@ -201,7 +202,7 @@
 }
 
 .comment-item image {
-  width: 80px;
+  width: 35px;
   height: 35px;
   margin-right: 8px;
 }

@@ -5,14 +5,44 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.cloud.init({
+      env: 'wczs-server-b8jyq'
+    });
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'user_yun',
+      // 传递给云函数的参数
+      data: {
+        $url: "user_xx_Query",
+        other: {
+        }
+      },
+      success: res => {
+        console.log(res)
+        var data = res.result.users_xx;
+        // for (let key in data) {
+        //   var date = new Date(data[key].time)
+        //   data[key].time = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+        // }
+        that.setData({
+          list: data
+        })
+      },
+      fail: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("res")
+      }
+    })
   },
 
   /**

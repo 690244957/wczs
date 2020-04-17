@@ -5,45 +5,41 @@ Page({
    * 页面的初始数据
    */
   data: {
-    starImages: [{
-      state: false,
-      path: '/images/icon_little_star_normal.png',
-    }, {
-      state: false,
-      path: '/images/icon_little_star_normal.png'
-    }],
+    list: [],
     currentTab: 0,
     sendSuccess: false
   },
 
   star: function (e) {
+    var that = this
     let index = e.currentTarget.dataset.index;
-    let statImgs;
-    if (index == 0) {
-      var path = '', state = !this.data.starImages[0].state
-      if (this.data.starImages[0].state) {
-        path = '/images/icon_little_star_normal.png'
-      } else {
-        path = '/images/icon_little_star_select.png'
-      }
-      statImgs = [{
-        state: state,
-        path: path,
-      }, this.data.starImages[1]]
-    } else if (index == 1) {
-      let path = '', state = !this.data.starImages[1].state
-      if (this.data.starImages[1].state) {
-        path = '/images/icon_little_star_normal.png'
-      } else {
-        path = '/images/icon_little_star_select.png'
-      }
-      statImgs = [this.data.starImages[0], {
-        state: state,
-        path: path,
-      }]
+    var url = ""
+    if (that.data.list[index].isStar) {
+      url = "tz_del_heart"
+    } else {
+      url = "tz_add_heart"
     }
-    this.setData({
-      starImages: statImgs
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'home_yun',
+      // 传递给云函数的参数
+      data: {
+        $url: url,
+        other: {
+          _id: that.data.list[index]._id,
+          isStar: !that.data.list[index].isStar
+        }
+      },
+      success: res => {
+        console.log(res)
+        that.getList()
+      },
+      fail: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("res")
+      }
     })
   },
 
@@ -66,11 +62,47 @@ Page({
     })
   },
 
+  getList: function() {
+    var that = this;
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'home_yun',
+      // 传递给云函数的参数
+      data: {
+        $url: "home_Query",
+        other: {
+          "is_delete": "0"
+        }
+      },
+      success: res => {
+        console.log(res)
+        var data = res.result.data;
+        for (let key in data) {
+          var date = new Date(data[key].time)
+          data[key].time = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+          if (data[key].isStar) {
+            data[key].path = '/images/icon_little_star_select.png'
+          } else {
+            data[key].path = '/images/icon_little_star_normal.png'
+          }
+        }
+        that.setData({
+          list: data
+        })
+      },
+      fail: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("res")
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
 
   /**
@@ -90,6 +122,10 @@ Page({
         sendSuccess: false
       })
     }
+    wx.cloud.init({
+      env: 'wczs-server-b8jyq'
+    });
+    this.getList()
   },
 
   /**

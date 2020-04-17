@@ -27,6 +27,22 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
+
+              wx.cloud.callFunction({
+                name: "getUserInfo",
+                data: {
+                  cloudID: res.cloudID
+                },
+                success: res => {
+                  console.log(res)
+                },
+                fail: err => {
+                  console.log(err)
+                },
+                complete: () => {
+                  console.log("res")
+                }
+              })
             }
           })
         }

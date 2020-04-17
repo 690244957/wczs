@@ -5,7 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    key: ""
+    key: "",
+    list: []
   },
 
   clearClick: function (e) {
@@ -30,6 +31,13 @@ Page({
     })
   },
 
+  histroyClick: function(e) {
+    let index = e.currentTarget.dataset.index;
+    this.setData({
+      key: this.data.list[index]
+    })
+  },
+
   openResult: function (e) {
     if (this.data.key === "" || this.data.key === undefined) {
       wx.showToast({
@@ -39,7 +47,7 @@ Page({
       return
     }
     wx.navigateTo({
-      url: '/pages/information/result/result',
+      url: '/pages/information/result/result?key=' + this.data.key,
     })
   },
 
@@ -47,7 +55,33 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this;
+    wx.cloud.init({
+      env: 'wczs-server-b8jyq'
+    });
+    wx.cloud.callFunction({
+      // 要调用的云函数名称
+      name: 'user_yun',
+      // 传递给云函数的参数
+      data: {
+        $url: "user_ls_Query",
+        other: {
+        }
+      },
+      success: res => {
+        console.log(res)
+        var data = res.result.users_ll_history;
+        that.setData({
+          list: data
+        })
+      },
+      fail: err => {
+        console.log(err)
+      },
+      complete: () => {
+        console.log("res")
+      }
+    })
   },
 
   /**

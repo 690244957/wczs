@@ -103,3 +103,23 @@ page {
   margin: auto 0;
   margin-left: 10px;
 }
+
+.empty-view {
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+
+.empty-view image {
+  width: 120px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.empty-view .empty-text {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 24rpx;
+  color: #707070;
+}

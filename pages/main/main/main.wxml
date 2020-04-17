@@ -46,21 +46,24 @@
 </view>
 <swiper class="swiper2" current="{{currentTab}}" bindchange="bindChange">
 	<swiper-item>
-		<view class="comment-item">
-			<image src="/images/avatar1.png"></image>
-			<view class="other-view">
-				<view class="top-view">
-					<view class="name">可爱的小红</view>
+		<scroll-view>
+			<view class="comment-item" wx:for='{{list}}' wx:for-item="item" wx:key="index">
+				<view class="avatar-view">
+					<image src="{{item.headImage}}"></image>
 				</view>
-				<view class="content">后来许多人问我一个人夜晚踟蹰路上的心情，我想起的却不是孤单和路长，而是波澜壮阔的海和天空中闪耀的星光。</view>
-				<view class="bottom-view">
-					<view class="time">2020.04.06</view>
-					<image src="{{starImages[0].path}}" data-index="0" catchtap="star"></image>
-					<view class="star-view">点赞</view>
+				<view class="other-view">
+					<view class="top-view">
+						<view class="name">{{item.name}}</view>
+					</view>
+					<view class="content">{{item.content}}</view>
+					<view class="bottom-view">
+						<view class="time">{{item.time}}</view>
+						<image src="{{item.path}}" data-index="{{index}}" catchtap="star"></image>
+						<view class="star-view">点赞</view>
+					</view>
 				</view>
 			</view>
-		</view>
-		<view class="comment-item">
+			<!-- <view class="comment-item">
 			<image src="/images/avatar2.png"></image>
 			<view class="other-view">
 				<view class="top-view">
@@ -73,7 +76,8 @@
 					<view class="star-view">点赞</view>
 				</view>
 			</view>
-		</view>
+		</view> -->
+		</scroll-view>
 	</swiper-item>
 </swiper>
 <toast id='toast'>
