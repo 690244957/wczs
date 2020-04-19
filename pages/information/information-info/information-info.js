@@ -25,6 +25,16 @@ Page({
     commentValue: "",
     commentList: []
   },
+  toast: function(e){
+    wx.showToast({
+      title: '新功能即将到来',
+      icon: 'loading',
+    })
+    setTimeout(function(){
+      wx.hideToast()
+    },2000)
+    
+  },
 
   star: function (e) {
     var that = this

@@ -5,11 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
+    toastHidden: true,
     list: [],
     currentTab: 0,
     sendSuccess: false
   },
-
+  toastBtn: function(e){
+    wx.showToast({
+      title: '新功能即将到来',
+      icon: 'loading',
+    })
+    setTimeout(function(){
+      wx.hideToast()
+    },2000)
+    
+  },
+   
   star: function (e) {
     var that = this
     let index = e.currentTarget.dataset.index;
@@ -52,10 +63,25 @@ Page({
       })
     }
   },
+  
   bindChange: function (e) {
     this.setData({ currentTab: e.detail.current });
   },
-
+  itemone: function () {
+    wx.navigateTo({
+      url: '/pages/information/shipin/second/index'
+    })
+  },
+  itemtwo: function () {
+    wx.navigateTo({
+      url: '/pages/information/shipin/first/index'
+    })
+  },
+  itemthree: function () {
+    wx.navigateTo({
+      url: '/pages/information/shipin/third/index'
+    })
+  },
   sendPost: function (e) {
     wx.navigateTo({
       url: '/pages/main/sendpost/sendpost',

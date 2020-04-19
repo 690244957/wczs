@@ -18,7 +18,7 @@
 		<image src="{{star.path}}"></image>
 		<view>{{detail.starNum}}</view>
 	</view>
-	<view class="subview">
+	<view class="subview" bindtap="toast">
 		<image src="/images/icon_share.png"></image>
 	</view>
 </view>

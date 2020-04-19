@@ -8,7 +8,7 @@ Page({
     list: [],
     currentTab: 0,
   },
-
+  
   star: function (e) {
     var that = this
     let index = e.currentTarget.dataset.index;
@@ -65,8 +65,24 @@ Page({
     wx.navigateTo({
       url: '/pages/information/information-info/information-info?info=' + JSON.stringify(this.data.list[index]),
     })
+    let ggg = '/pages/information/information-info/information-info?info=' + JSON.stringify(this.data.list[index]);
+    console.log(ggg)
   },
-
+  itemfirst: function () {
+    wx.navigateTo({
+      url: '/pages/information/shipin/first/index'
+    })
+  },
+  itemsecond: function () {
+    wx.navigateTo({
+      url: '/pages/information/shipin/second/index'
+    })
+  },
+  itemthird: function () {
+    wx.navigateTo({
+      url: '/pages/information/shipin/third/index'
+    })
+  },
   /**
    * 生命周期函数--监听页面加载
    */

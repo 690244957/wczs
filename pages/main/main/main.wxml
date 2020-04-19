@@ -1,21 +1,21 @@
 <swiper class="first-swiper" autoplay="true" indicator-dots="true" circular="true">
-	<swiper-item>
+	<swiper-item bindtap="itemone">
 		<view>
 			<image src="/images/banner1.png"></image>
 		</view>
 	</swiper-item>
-	<swiper-item>
+	<swiper-item bindtap="itemtwo">
 		<view>
 			<image src="/images/banner2.png"></image>
 		</view>
 	</swiper-item>
-	<swiper-item>
+	<swiper-item bindtap="itemthree">
 		<view>
-			<image src="/images/banner3.png"></image>
+			<image src="/images/linux.png"></image>
 		</view>
 	</swiper-item>
 </swiper>
-<view class='line-view'>
+<view class='line-view' bindtap="toastBtn">
 	<view class='line-view-item'>
 		<image src='/images/icon_1.png'>
 		</image>
