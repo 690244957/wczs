@@ -1,14 +1,7 @@
 <view class="all-view">
-	<view class="item-view">
-		<view class="delete-view" bindtap="delete">
-			<image class="delete" src="/images/icon_delete.png"></image>
-		</view>
-		<view class="item-sub">
-			<view class="content">交流帖子文字交流帖子文字交流帖子文字交流帖子文字交流帖子文字交流帖。</view>
-			<view class="date">2020.02.03 14:11发布</view>
-		</view>
+	<view>
+			<image src="../../../images/liulan.jpg" style="width:294rpx;height:192rpx;margin-top:200rpx;margin-left:228rpx"></image>
+			<view style="margin-top:44rpx;text-align:center;color:#707070;font-size:28rpx">还没有发布过帖子哦，快去发布吧</view>
 	</view>
-	<view class="line-view">
-		<view class="line"></view>
-	</view>
+	
 </view>
